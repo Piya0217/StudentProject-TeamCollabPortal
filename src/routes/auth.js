@@ -29,7 +29,7 @@ router.post('/login', async (req, res) => {
 
   try {
     const result = await query(
-      `SELECT id, name, email, role, skills, password
+      `SELECT id, name, email, role, skills, interests, designation, experience_years, password_hash
          FROM users
         WHERE email = $1`,
       [email.trim().toLowerCase()]
@@ -42,12 +42,12 @@ router.post('/login', async (req, res) => {
     const user = result.rows[0];
 
     // Prototype: plain-text comparison. Swap for bcrypt in production.
-    if (user.password !== password) {
+    if (user.password_hash !== password) {
       return res.status(401).json({ error: 'Invalid email or password.' });
     }
 
     // Never send the password back to the client.
-    const { password: _pw, ...safeUser } = user;
+    const { password_hash: _pw, ...safeUser } = user;
 
     return res.json({
       message: 'Login successful.',

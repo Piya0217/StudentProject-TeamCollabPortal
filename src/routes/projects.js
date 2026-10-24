@@ -60,13 +60,14 @@ router.get('/', async (req, res) => {
 // Body: { title, description, owner_id, status? }
 // ---------------------------------------------------------------------------
 router.post('/', async (req, res) => {
-  const { title, description, owner_id, status } = req.body;
+  const { title, description, owner_id, faculty_id, status } = req.body;
 
   if (!title || !owner_id) {
     return res.status(400).json({ error: 'title and owner_id are required.' });
   }
 
-  const allowedStatuses = ['active', 'completed', 'archived'];
+  // DB CHECK: 'active' | 'completed' | 'on_hold'
+  const allowedStatuses = ['active', 'completed', 'on_hold'];
   const projectStatus = allowedStatuses.includes(status) ? status : 'active';
 
   try {
@@ -76,11 +77,21 @@ router.post('/', async (req, res) => {
       return res.status(400).json({ error: `No user found with id ${owner_id}.` });
     }
 
+    if (faculty_id) {
+      const facultyCheck = await query(
+        `SELECT id FROM users WHERE id = $1 AND role = 'faculty'`,
+        [faculty_id]
+      );
+      if (facultyCheck.rows.length === 0) {
+        return res.status(400).json({ error: `User ${faculty_id} is not a faculty member.` });
+      }
+    }
+
     const result = await query(
-      `INSERT INTO projects (title, description, owner_id, status)
-            VALUES ($1, $2, $3, $4)
+      `INSERT INTO projects (title, description, owner_id, faculty_id, status, progress_percent)
+            VALUES ($1, $2, $3, $4, $5, $6)
          RETURNING *`,
-      [title.trim(), description || null, owner_id, projectStatus]
+      [title.trim(), description || null, owner_id, faculty_id || null, projectStatus, 0]
     );
 
     const project = result.rows[0];
@@ -217,10 +228,10 @@ router.post('/:id/tasks', async (req, res) => {
   if (!title) return res.status(400).json({ error: 'title is required.' });
 
   const allowedPriorities = ['low', 'medium', 'high'];
-  const allowedStatuses   = ['todo', 'in_progress', 'done'];
+  const allowedStatuses = ['todo', 'in_progress', 'done'];
 
   const taskPriority = allowedPriorities.includes(priority) ? priority : 'medium';
-  const taskStatus   = allowedStatuses.includes(status)     ? status   : 'todo';
+  const taskStatus = allowedStatuses.includes(status) ? status : 'todo';
 
   try {
     // Validate project
@@ -239,7 +250,7 @@ router.post('/:id/tasks', async (req, res) => {
         title.trim(),
         description || null,
         assignee_id || null,
-        deadline    || null,
+        deadline || null,
         taskPriority,
         taskStatus,
       ]
@@ -266,8 +277,9 @@ router.post('/:id/reviews', async (req, res) => {
     return res.status(400).json({ error: 'faculty_id and comment are required.' });
   }
 
-  const allowedStatuses = ['pending', 'approved', 'needs_revision'];
-  const rvStatus = allowedStatuses.includes(review_status) ? review_status : 'pending';
+  // DB CHECK: 'reviewed' | 'needs_changes' | 'approved'
+  const allowedStatuses = ['reviewed', 'needs_changes', 'approved'];
+  const rvStatus = allowedStatuses.includes(review_status) ? review_status : 'reviewed';
 
   try {
     // Validate faculty user

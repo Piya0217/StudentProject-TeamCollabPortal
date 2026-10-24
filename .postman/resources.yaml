@@ -1,0 +1,14 @@
+workspace:
+  id: d17efd24-ad95-46a3-a36f-e68fd27f7114
+
+# Each entry here maps a local resource to one or more corresponding objects in Postman Cloud
+
+cloudResources:
+  globals:
+    ../postman/globals/workspace.globals.yaml: c12f82d1-3092-4b37-8fd9-37365530b36a
+  collections:
+    ../Student Project & Team Collaboration Portal API: team-collab-portal-v1
+
+localResources:
+  collections:
+    - ../Student Project & Team Collaboration Portal API

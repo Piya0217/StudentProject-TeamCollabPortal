@@ -24,15 +24,20 @@ const { query } = require('../db');
  * ]
  */
 router.get('/projects', async (req, res) => {
+  const facultyId = req.query.facultyId ? Number(req.query.facultyId) : null;
+  if (facultyId !== null && (!Number.isInteger(facultyId) || facultyId < 1)) {
+    return res.status(400).json({ error: 'facultyId must be a valid user id.' });
+  }
   try {
     // 1. All projects with owner name
     const projectsResult = await query(`
-      SELECT p.id, p.title, p.description, p.owner_id, p.status, p.created_at,
+      SELECT p.id, p.title, p.description, p.owner_id, p.faculty_id, p.status, p.created_at,
              u.name AS owner_name
         FROM projects p
         JOIN users u ON u.id = p.owner_id
+       WHERE ($1::int IS NULL OR p.faculty_id = $1)
     ORDER BY p.created_at DESC
-    `);
+    `, [facultyId]);
 
     if (projectsResult.rows.length === 0) {
       return res.json({ projects: [] });

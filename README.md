@@ -2,6 +2,18 @@
 
 A Node.js/Express REST API prototype for managing student projects, teams, tasks, and faculty reviews.
 
+## Frontend prototype
+
+The React + TypeScript frontend lives in [`frontend/`](frontend/README.md). It connects to this API for login, project and task data, project creation/team membership, task creation/status changes, and faculty reviews. Start the API and frontend in separate terminals.
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Run the API separately from the repository root with `npm install` and `npm run dev`. The API allows the Vite development origin (`http://localhost:5173`). File uploads and the student directory still use prototype data because this API branch has no resources or users-list endpoints.
+
 ---
 
 ## Table of Contents

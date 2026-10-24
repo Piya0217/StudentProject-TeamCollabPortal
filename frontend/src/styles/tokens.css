@@ -1,0 +1,58 @@
+:root {
+  color-scheme: light;
+  --canvas: #F5F5F7;
+  --surface: #FFFFFF;
+  --surface-raised: #FFFFFF;
+  --ink: #1D1D1F;
+  --ink-secondary: #6E6E73;
+  --accent: #0071E3;
+  --accent-hover: #0066CC;
+  --hairline: rgba(0,0,0,.08);
+  --hairline-strong: rgba(0,0,0,.13);
+  --status-todo: #8E8E93;
+  --status-progress: #0A84FF;
+  --status-review: #B76A00;
+  --status-done: #248A3D;
+  --priority-high: #D70015;
+  --priority-medium: #9A5700;
+  --priority-low: #6E6E73;
+  --shadow-small: 0 2px 8px rgba(0,0,0,.04);
+  --shadow-panel: 0 16px 48px rgba(0,0,0,.10), 0 2px 8px rgba(0,0,0,.04);
+  --ease-out: cubic-bezier(.23,1,.32,1);
+  --ease-in-out: cubic-bezier(.77,0,.175,1);
+  --ease-drawer: cubic-bezier(.32,.72,0,1);
+  --press-duration: 120ms;
+  --popover-duration: 200ms;
+  --route-duration: 200ms;
+  --radius-chip: 8px;
+  --radius-control: 10px;
+  --radius-card: 16px;
+  --radius-sheet: 24px;
+  --radius-window: 28px;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", Inter, system-ui, sans-serif;
+  font-optical-sizing: auto;
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --canvas: #000000;
+  --surface: #1C1C1E;
+  --surface-raised: #2C2C2E;
+  --ink: #F5F5F7;
+  --ink-secondary: #A1A1A6;
+  --accent: #2997FF;
+  --accent-hover: #4AA8FF;
+  --hairline: rgba(255,255,255,.12);
+  --hairline-strong: rgba(255,255,255,.2);
+  --status-todo: #A1A1A6;
+  --status-progress: #2997FF;
+  --status-review: #FFB340;
+  --status-done: #30D158;
+  --priority-high: #FF6961;
+  --priority-medium: #FFB340;
+  --priority-low: #A1A1A6;
+  --shadow-small: 0 2px 8px rgba(0,0,0,.22);
+  --shadow-panel: 0 18px 50px rgba(0,0,0,.48);
+}
+@supports (corner-shape: squircle) {
+  .button, input, textarea, select, .project-card, .surface-panel, .sidebar, .topbar, .form-panel { corner-shape: squircle; }
+}
