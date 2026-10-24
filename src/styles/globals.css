@@ -1,0 +1,285 @@
+/* =============================================================================
+   GLOBALS — Base resets, Tailwind directives, focus-visible system
+   PostCSS rule: @import MUST precede @tailwind directives
+   ============================================================================= */
+
+@import './tokens.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =============================================================================
+   BASE LAYER RESETS
+   ============================================================================= */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    /* Never use transition: all */
+    /* border-box ensures 8pt grid integrity */
+  }
+
+  html {
+    font-family: var(--font-family);
+    font-optical-sizing: var(--font-optical-sizing);
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    /* Theme colors */
+    background-color: var(--canvas);
+    color: var(--ink);
+    /* Hardware accelerate theme transitions */
+    will-change: background-color;
+  }
+
+  body {
+    min-height: 100dvh;
+    background-color: var(--canvas);
+    color: var(--ink);
+    font-size: var(--size-body);
+    line-height: var(--lh-body);
+    letter-spacing: var(--ls-body);
+    overflow-x: hidden;
+  }
+
+  /* =============================================================================
+     FOCUS VISIBLE — Visible rings for keyboard navigation
+     Must meet WCAG 2.2 SC 2.4.11 (3px minimum)
+     ============================================================================= */
+  :focus {
+    outline: none;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: var(--focus-ring-offset);
+    border-radius: var(--radius-control);
+  }
+
+  /* High contrast override for focus */
+  @media (prefers-contrast: more) {
+    :focus-visible {
+      outline-width: 3px;
+      outline-offset: 3px;
+    }
+  }
+
+  /* =============================================================================
+     TYPOGRAPHY BASE
+     ============================================================================= */
+  h1 {
+    font-size: var(--size-title-1);
+    line-height: var(--lh-title-1);
+    letter-spacing: var(--ls-title-1);
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  h2 {
+    font-size: var(--size-title-2);
+    line-height: var(--lh-title-2);
+    letter-spacing: var(--ls-title-2);
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  h3 {
+    font-size: var(--size-headline);
+    line-height: var(--lh-headline);
+    letter-spacing: var(--ls-headline);
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  p {
+    font-size: var(--size-body);
+    line-height: var(--lh-body);
+    color: var(--ink);
+  }
+
+  /* =============================================================================
+     INTERACTIVE ELEMENTS
+     ============================================================================= */
+  button,
+  [role='button'] {
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+  }
+
+  input,
+  textarea,
+  select {
+    font-family: inherit;
+    color: var(--ink);
+    background: var(--surface);
+  }
+
+  a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  /* =============================================================================
+     SCROLLBAR — minimal, theme-aware
+     ============================================================================= */
+  :root {
+    scrollbar-width: thin;
+    scrollbar-color: var(--ink-secondary) transparent;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--fill-tertiary);
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--ink-secondary);
+  }
+
+  /* =============================================================================
+     SELECTION COLOR
+     ============================================================================= */
+  ::selection {
+    background: var(--accent-subtle);
+    color: var(--ink);
+  }
+
+  /* =============================================================================
+     LANDMARK & SEMANTIC ELEMENTS
+     ============================================================================= */
+  main {
+    display: block;
+  }
+
+  img,
+  svg,
+  video {
+    display: block;
+    max-width: 100%;
+  }
+
+  /* =============================================================================
+     REDUCED MOTION: screen-level opacity only
+     Applied globally, each component respects this
+     ============================================================================= */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+/* =============================================================================
+   UTILITY LAYER — Token-mapped utilities
+   ============================================================================= */
+@layer utilities {
+  /* Typography utilities */
+  .text-display {
+    font-size: var(--size-display);
+    line-height: var(--lh-display);
+    letter-spacing: var(--ls-display);
+    font-weight: 600;
+  }
+
+  .text-title-1 {
+    font-size: var(--size-title-1);
+    line-height: var(--lh-title-1);
+    letter-spacing: var(--ls-title-1);
+    font-weight: 700;
+  }
+
+  .text-title-2 {
+    font-size: var(--size-title-2);
+    line-height: var(--lh-title-2);
+    letter-spacing: var(--ls-title-2);
+    font-weight: 600;
+  }
+
+  .text-headline {
+    font-size: var(--size-headline);
+    line-height: var(--lh-headline);
+    letter-spacing: var(--ls-headline);
+    font-weight: 600;
+  }
+
+  .text-body {
+    font-size: var(--size-body);
+    line-height: var(--lh-body);
+    letter-spacing: var(--ls-body);
+    font-weight: 400;
+  }
+
+  .text-caption {
+    font-size: var(--size-caption);
+    line-height: var(--lh-caption);
+    letter-spacing: var(--ls-caption);
+    font-weight: 500;
+  }
+
+  /* Ink color utilities */
+  .text-ink          { color: var(--ink); }
+  .text-ink-secondary { color: var(--ink-secondary); }
+  .text-accent       { color: var(--accent); }
+
+  /* Surface utilities */
+  .bg-canvas         { background-color: var(--canvas); }
+  .bg-surface        { background-color: var(--surface); }
+  .bg-surface-raised { background-color: var(--surface-raised); }
+  .bg-accent-subtle  { background-color: var(--accent-subtle); }
+
+  /* Border utilities */
+  .border-hairline   { border-color: var(--hairline); }
+
+  /* Min touch target size */
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Button press scale */
+  .press-scale {
+    transition: transform var(--duration-press) var(--ease-out);
+  }
+
+  .press-scale:active {
+    transform: scale(0.97);
+  }
+
+  /* Hover effects — only on capable devices */
+  @media (hover: hover) and (pointer: fine) {
+    .hover-surface:hover {
+      background-color: var(--fill-quaternary);
+      transition: background-color 100ms var(--ease-out);
+    }
+
+    .hover-lift:hover {
+      box-shadow: var(--shadow-card-lifted);
+      transition: box-shadow 100ms var(--ease-out);
+    }
+  }
+
+  /* Hairline divider */
+  .divide-hairline > * + * {
+    border-top: 1px solid var(--hairline);
+  }
+}

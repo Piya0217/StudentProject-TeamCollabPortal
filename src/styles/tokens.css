@@ -1,0 +1,359 @@
+/* =============================================================================
+   DESIGN TOKEN SYSTEM — Student Project & Team Collaboration Portal
+   Direction: "quiet glass, one loud moment"
+   Every token maps directly to docs/DESIGN_RULES.md
+   ============================================================================= */
+
+/* Inter Variable font from Google Fonts (loaded in index.html) */
+/* @font-face declarations would go here for self-hosted Inter */
+
+/* =============================================================================
+   LIGHT MODE TOKENS (default)
+   ============================================================================= */
+:root {
+  /* ── Color: Structural ── */
+  --canvas: #f5f5f7;
+  --surface: #ffffff;
+  --surface-raised: #ffffff;
+  --ink: #1d1d1f;
+  --ink-secondary: #6e6e73;
+  --accent: #0071e3;
+  --hairline: rgba(0, 0, 0, 0.08);
+
+  /* ── Color: Glass material overlay ── */
+  --glass-bg: rgba(255, 255, 255, 0.72);
+  --glass-border-top: rgba(255, 255, 255, 0.8);
+  --glass-border: rgba(0, 0, 0, 0.08);
+
+  /* ── Color: Status (constant across themes — both meet AA on surfaces) ── */
+  --status-todo: #8e8e93;
+  --status-in-progress: #0a84ff;
+  --status-in-review: #ff9f0a;
+  --status-done: #30d158;
+
+  /* ── Color: Priority ── */
+  --priority-high: #ff453a;
+  --priority-medium: #ff9f0a;
+  --priority-low: #8e8e93;
+
+  /* ── Color: Project health ── */
+  --health-ontrack: #30d158;
+  --health-atrisk: #ff9f0a;
+  --health-overdue: #ff453a;
+
+  /* ── Color: Interactive states ── */
+  --accent-hover: #0077ed;
+  --accent-pressed: #006edb;
+  --accent-subtle: rgba(0, 113, 227, 0.08);
+
+  /* ── Color: Semantic fill (for focused/selected surfaces) ── */
+  --fill-tertiary: rgba(118, 118, 128, 0.12);
+  --fill-quaternary: rgba(118, 118, 128, 0.08);
+
+  /* ── Typography ── */
+  --font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Inter',
+    ui-sans-serif, system-ui, sans-serif;
+  --font-optical-sizing: auto;
+
+  /* Type scale sizes */
+  --size-display: 3.5rem;      /* 56px */
+  --size-title-1: 2.125rem;    /* 34px */
+  --size-title-2: 1.5rem;      /* 24px */
+  --size-headline: 1.0625rem;  /* 17px */
+  --size-body: 0.9375rem;      /* 15px */
+  --size-caption: 0.75rem;     /* 12px */
+
+  /* Line heights */
+  --lh-display: 1.05;
+  --lh-title-1: 1.12;
+  --lh-title-2: 1.20;
+  --lh-headline: 1.30;
+  --lh-body: 1.50;
+  --lh-caption: 1.40;
+
+  /* Letter spacing (optical tracking per size) */
+  --ls-display: -0.03em;
+  --ls-title-1: -0.022em;
+  --ls-title-2: -0.018em;
+  --ls-headline: -0.01em;
+  --ls-body: 0em;
+  --ls-caption: 0.01em;
+
+  /* ── Shape: Radius scale by hierarchy ── */
+  --radius-chip: 8px;
+  --radius-control: 10px;
+  --radius-card: 16px;
+  --radius-sheet: 24px;
+  --radius-window: 28px;
+
+  /* ── Shadows: Layered, context-aware ── */
+  --shadow-chip: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-control: 0 1px 2px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(0, 0, 0, 0.04);
+  --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.04);
+  --shadow-card-lifted: 0 8px 24px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.04);
+  --shadow-sheet: 0 12px 36px rgba(0, 0, 0, 0.12), 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-window: 0 24px 64px rgba(0, 0, 0, 0.16), 0 8px 24px rgba(0, 0, 0, 0.08);
+
+  /* ── Spacing: 8pt grid ── */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+
+  /* ── Layout ── */
+  --content-max-width: 1280px;
+  --sidebar-width: 248px;
+  --sidebar-rail-width: 72px;
+  --toolbar-height: 56px;
+  --mobile-tabbar-height: 64px;
+
+  /* ── Motion: Bezier curves ── */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+
+  /* ── Motion: Duration tokens ── */
+  --duration-press: 100ms;
+  --duration-tooltip: 125ms;
+  --duration-dropdown: 160ms;
+  --duration-modal: 240ms;
+  --duration-sheet: 320ms;
+  --duration-theme: 300ms;
+  --duration-route: 200ms;
+  --duration-progress: 400ms;
+  --duration-delight: 480ms;
+
+  /* ── Focus ring ── */
+  --focus-ring: 0 0 0 3px rgba(0, 113, 227, 0.45);
+  --focus-ring-offset: 2px;
+
+  /* ── Scrim for modals ── */
+  --scrim: rgba(0, 0, 0, 0.40);
+}
+
+/* =============================================================================
+   DARK MODE TOKENS
+   Applied via class="dark" on <html> — 300ms cross-fade via transition on :root
+   ============================================================================= */
+.dark {
+  /* ── Color: Structural ── */
+  --canvas: #000000;
+  --surface: #1c1c1e;
+  --surface-raised: #2c2c2e;
+  --ink: #f5f5f7;
+  --ink-secondary: #a1a1a6;
+  --accent: #2997ff;
+  --hairline: rgba(255, 255, 255, 0.12);
+
+  /* ── Color: Glass material overlay ── */
+  --glass-bg: rgba(28, 28, 30, 0.75);
+  --glass-border-top: rgba(255, 255, 255, 0.15);
+  --glass-border: rgba(255, 255, 255, 0.12);
+
+  /* ── Color: Shadows invert in dark mode (use glow/depth instead) ── */
+  --shadow-chip: none;
+  --shadow-control: 0 1px 2px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.08);
+  --shadow-card: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --shadow-card-lifted: 0 8px 32px rgba(0, 0, 0, 0.5);
+  --shadow-sheet: 0 16px 48px rgba(0, 0, 0, 0.6);
+  --shadow-window: 0 32px 80px rgba(0, 0, 0, 0.7);
+
+  /* ── Color: Interactive states ── */
+  --accent-hover: #3aa3ff;
+  --accent-pressed: #1f8fff;
+  --accent-subtle: rgba(41, 151, 255, 0.12);
+
+  /* ── Color: Semantic fill ── */
+  --fill-tertiary: rgba(118, 118, 128, 0.20);
+  --fill-quaternary: rgba(118, 118, 128, 0.16);
+
+  /* ── Focus ring ── */
+  --focus-ring: 0 0 0 3px rgba(41, 151, 255, 0.5);
+
+  /* ── Scrim ── */
+  --scrim: rgba(0, 0, 0, 0.65);
+}
+
+/* =============================================================================
+   THEME TRANSITION — 300ms cross-fade, no brightness flash
+   Uses only color and opacity properties (never brightness) to avoid flash
+   ============================================================================= */
+:root {
+  transition:
+    background-color var(--duration-theme) var(--ease-in-out),
+    color var(--duration-theme) var(--ease-in-out);
+}
+
+/* Prevent transition on first paint */
+.no-transition,
+.no-transition * {
+  transition: none !important;
+}
+
+/* =============================================================================
+   MATERIAL CLASSES — Translucent glass surfaces
+   sidebar, toolbar, sheets, popovers get backdrop-filter
+   ============================================================================= */
+.glass-surface {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-top: 1px solid var(--glass-border-top);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.glass-sidebar {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-right: 1px solid var(--hairline);
+}
+
+.glass-toolbar {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.glass-popover {
+  background: var(--surface-raised);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid var(--hairline);
+  box-shadow: var(--shadow-sheet);
+}
+
+.glass-sheet {
+  background: var(--surface-raised);
+  backdrop-filter: blur(28px) saturate(200%);
+  -webkit-backdrop-filter: blur(28px) saturate(200%);
+  box-shadow: var(--shadow-sheet);
+}
+
+/* =============================================================================
+   ACCESSIBILITY OVERRIDES
+   ============================================================================= */
+
+/* Reduced transparency: remove all blur, use solid surfaces */
+@media (prefers-reduced-transparency: reduce) {
+  .glass-surface,
+  .glass-sidebar,
+  .glass-toolbar,
+  .glass-popover,
+  .glass-sheet {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: var(--surface) !important;
+  }
+
+  :root {
+    --glass-bg: var(--surface);
+  }
+
+  .dark {
+    --glass-bg: var(--surface);
+  }
+}
+
+/* High contrast: near-solid borders everywhere */
+@media (prefers-contrast: more) {
+  :root {
+    --hairline: rgba(0, 0, 0, 0.35);
+    --glass-border: rgba(0, 0, 0, 0.35);
+    --shadow-card: 0 0 0 1.5px rgba(0, 0, 0, 0.35);
+    --shadow-control: 0 0 0 1.5px rgba(0, 0, 0, 0.35);
+  }
+
+  .dark {
+    --hairline: rgba(255, 255, 255, 0.4);
+    --glass-border: rgba(255, 255, 255, 0.4);
+    --shadow-card: 0 0 0 1.5px rgba(255, 255, 255, 0.4);
+    --shadow-control: 0 0 0 1.5px rgba(255, 255, 255, 0.4);
+  }
+
+  .glass-surface,
+  .glass-sidebar,
+  .glass-toolbar,
+  .glass-popover,
+  .glass-sheet {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+/* Reduced motion: replace all transforms/springs with 200ms opacity fades */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-press: 0ms;
+    --duration-tooltip: 150ms;
+    --duration-dropdown: 150ms;
+    --duration-modal: 200ms;
+    --duration-sheet: 200ms;
+    --duration-route: 200ms;
+    --duration-progress: 200ms;
+    --duration-delight: 200ms;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Only opacity cross-fades survive reduced motion */
+  .motion-safe-only {
+    transition: opacity 200ms var(--ease-in-out) !important;
+    transform: none !important;
+  }
+}
+
+/* =============================================================================
+   SQUIRCLE: Progressive enhancement
+   ============================================================================= */
+@supports (corner-shape: squircle) {
+  .squircle-chip     { border-radius: var(--radius-chip);    corner-shape: squircle; }
+  .squircle-control  { border-radius: var(--radius-control); corner-shape: squircle; }
+  .squircle-card     { border-radius: var(--radius-card);    corner-shape: squircle; }
+  .squircle-sheet    { border-radius: var(--radius-sheet);   corner-shape: squircle; }
+  .squircle-window   { border-radius: var(--radius-window);  corner-shape: squircle; }
+}
+
+/* =============================================================================
+   SCROLL EDGE FADE — gradient mask under toolbar instead of hard border
+   Apply to the scrollable main content container
+   ============================================================================= */
+.scroll-fade-top {
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0px, black 24px);
+  mask-image: linear-gradient(to bottom, transparent 0px, black 24px);
+}
+
+/* =============================================================================
+   SHIMMER SKELETON ANIMATION
+   ============================================================================= */
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+
+.skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--fill-tertiary) 25%,
+    var(--fill-quaternary) 50%,
+    var(--fill-tertiary) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s linear infinite;
+}
